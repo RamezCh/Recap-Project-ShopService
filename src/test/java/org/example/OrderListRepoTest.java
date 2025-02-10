@@ -22,12 +22,12 @@ class OrderListRepoTest {
         order1 = new Order(
                 "ORD001", "USER123", List.of(
                 new Product("LAP123", "Gaming Laptop", "High-performance gaming laptop", "Electronics", 35, 25, 3, "Black", "Aluminum", new BigDecimal("1299.99"), "USD", 2.5, "SKU-001", 10)
-        ), 1299.99, "Pending", "123 Main St", "456 Billing St", "Credit Card", LocalDateTime.now());
+        ), new BigDecimal("1299.99"), "Pending", "123 Main St", "456 Billing St", "Credit Card", LocalDateTime.now());
 
         order2 = new Order(
                 "ORD002", "USER456", List.of(
                 new Product("PHN456", "Smartphone X", "Latest smartphone with OLED display", "Electronics", 15, 7, 0, "Silver", "Glass & Metal", new BigDecimal("899.99"), "USD", 0.4, "SKU-002", 50)
-        ), 899.99, "Shipped", "789 Shipping Ln", "101 Billing Ave", "PayPal", LocalDateTime.now());
+        ), new BigDecimal("899.99"), "Shipped", "789 Shipping Ln", "101 Billing Ave", "PayPal", LocalDateTime.now());
 
         orders.add(order1);
         orders.add(order2);
@@ -43,7 +43,7 @@ class OrderListRepoTest {
         Order order3 = new Order(
                 "ORD003", "USER789", List.of(
                 new Product("TAB789", "Tablet Pro", "High-performance tablet", "Electronics", 20, 10, 5, "Gray", "Metal", new BigDecimal("699.99"), "USD", 1.0, "SKU-003", 15)
-        ), 699.99, "Processing", "567 New St", "890 Billing Rd", "Debit Card", LocalDateTime.now());
+        ), new BigDecimal("699.99"), "Processing", "567 New St", "890 Billing Rd", "Debit Card", LocalDateTime.now());
         orders.add(order3);
         assertEquals(3, orders.getOrders().size());
         assertTrue(orders.getOrders().contains(order3));

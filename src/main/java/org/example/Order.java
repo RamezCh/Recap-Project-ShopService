@@ -7,7 +7,7 @@ public record Order(
         String orderId,
         String userId,
         List<Product> products,
-        double totalPrice,
+        java.math.BigDecimal totalPrice,
         String status,
         String shippingAddress,
         String billingAddress,
