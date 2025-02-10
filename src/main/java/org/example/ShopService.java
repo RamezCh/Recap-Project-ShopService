@@ -15,20 +15,32 @@ public class ShopService {
     }
 
     public Order placeOrder(List<Product> orderedProducts, String userId, String shippingAddress, String billingAddress, String paymentMethod) {
-        if(orderedProducts == null) {
+        if (orderedProducts == null || orderedProducts.isEmpty()) {
+            System.out.println("No products ordered.");
             return null;
         }
 
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
         for (Product product : orderedProducts) {
-            if (products.getProduct(product.modelNumber()) == null) {
+            Product existingProduct = products.getProduct(product.modelNumber());
+
+            if (existingProduct == null) {
                 System.out.println("Ordered product " + product.modelNumber() + " doesn't exist!");
                 return null;
             }
+
+            if (existingProduct.stockQuantity() < 1) {
+                System.out.println("Product " + product.modelNumber() + " is out of stock!");
+                return null;
+            }
+
+            totalPrice = totalPrice.add(existingProduct.price());
         }
 
-        BigDecimal totalPrice = new BigDecimal("0.00");
-        for(Product product : orderedProducts) {
-           totalPrice = totalPrice.add(product.price());
+        for (Product product : orderedProducts) {
+            Product existingProduct = products.getProduct(product.modelNumber());
+            products.updateProduct(existingProduct.withStockQuantity(existingProduct.stockQuantity() - 1));
         }
 
         Order order = new Order(
@@ -44,7 +56,7 @@ public class ShopService {
         );
 
         orders.add(order);
-
         return order;
     }
+
 }

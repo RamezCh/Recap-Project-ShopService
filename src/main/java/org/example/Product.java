@@ -18,4 +18,22 @@ public record Product(
         String sku,
         int stockQuantity
 ) {
+    public Product withStockQuantity(int stockQuantity) {
+        return new Product(
+                modelNumber,
+                name,
+                description,
+                category,
+                width,
+                height,
+                depth,
+                color,
+                material,
+                price,
+                currencyCode,
+                weight,
+                sku,
+                stockQuantity
+        );
+    }
 }

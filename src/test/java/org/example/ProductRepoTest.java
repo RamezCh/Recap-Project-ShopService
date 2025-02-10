@@ -68,4 +68,21 @@ class ProductRepoTest {
         Product actual = products.getProduct("PHN456");
         assertEquals(expected, actual);
     }
+
+    @Test
+    void shouldUpdateProductSuccessfully() {
+        Product updatedSmartphone = new Product(
+                "PHN456", "Smartphone X Pro", "Upgraded smartphone with better OLED display",
+                "Electronics", 20, 10, 0, "Silver", "Glass & Metal",
+                new BigDecimal("999.99"), "USD", 0.4, "SKU-002", 45
+        );
+
+        products.updateProduct(updatedSmartphone);
+
+        Product retrievedProduct = products.getProduct("PHN456");
+        assertNotNull(retrievedProduct);
+        assertEquals("Smartphone X Pro", retrievedProduct.name());
+        assertEquals(new BigDecimal("999.99"), retrievedProduct.price());
+        assertEquals(45, retrievedProduct.stockQuantity());
+    }
 }

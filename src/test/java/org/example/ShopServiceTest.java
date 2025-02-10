@@ -73,8 +73,7 @@ class ShopServiceTest {
         Order order = shopService.placeOrder(
                 Arrays.asList(), "userId123", "123 Street", "456 Avenue", "Credit Card");
 
-        assertNotNull(order);
-        assertEquals(new BigDecimal("0.00"), order.totalPrice());
+        assertNull(order);
     }
 
     @Test

@@ -34,6 +34,15 @@ public class ProductRepo {
         }
     }
 
+    public void updateProduct(Product updatedProduct) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).modelNumber().equals(updatedProduct.modelNumber())) {
+                products.set(i, updatedProduct);
+                return;
+            }
+        }
+    }
+
     public Product getProduct(String modelNumber) {
         for (Product product : products) {
             if (product.modelNumber().equals(modelNumber)) {
