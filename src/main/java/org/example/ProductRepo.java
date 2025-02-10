@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProductRepo {
     private List<Product> products = new ArrayList<>();
@@ -42,6 +43,17 @@ public class ProductRepo {
         return null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductRepo that = (ProductRepo) o;
+        return Objects.equals(products, that.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(products);
+    }
 
     @Override
     public String toString() {
